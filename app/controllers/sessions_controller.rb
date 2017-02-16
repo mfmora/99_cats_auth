@@ -1,4 +1,13 @@
 class SessionsController < ApplicationController
+
+  before_action :already_logged_in
+
+  def already_logged_in
+    unless params[:action] == "destroy"
+      redirect_to cats_url if current_user 
+    end
+  end
+
   def new
     render :new
   end
@@ -12,6 +21,11 @@ class SessionsController < ApplicationController
       flash[:errors] = ["Invalid Credentials"]
       redirect_to new_session_url
     end
+  end
+
+  def destroy
+    logout
+    redirect_to cats_url
   end
 
 end
