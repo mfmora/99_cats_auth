@@ -16,6 +16,8 @@ class User < ActiveRecord::Base
   validates :password, length: { minimum: 6, allow_nil: true }
   after_initialize :ensure_session_token
 
+  has_many :cats
+
   attr_reader :password
 
   def ensure_session_token
@@ -46,7 +48,7 @@ class User < ActiveRecord::Base
     if user
       return user if user.is_password?(password)
     end
-    nil 
+    nil
   end
 
 end
