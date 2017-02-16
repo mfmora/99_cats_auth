@@ -17,6 +17,7 @@ class User < ActiveRecord::Base
   after_initialize :ensure_session_token
 
   has_many :cats
+  has_many :cat_rental_requests
 
   attr_reader :password
 

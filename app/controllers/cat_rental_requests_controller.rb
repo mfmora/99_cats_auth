@@ -15,6 +15,7 @@ class CatRentalRequestsController < ApplicationController
 
   def create
     @rental_request = CatRentalRequest.new(cat_rental_request_params)
+    @rental_request.requester = current_user
     if @rental_request.save
       redirect_to cat_url(@rental_request.cat)
     else
